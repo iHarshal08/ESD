@@ -20,6 +20,8 @@ public class CustomerService {
     private final CustomerMapper customerMapper;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+
+
     public String createCustomer(CustomerRequest request) {
         Customer customer = customerMapper.toEntity(request);
         customer.setPassword(passwordEncoder.encode(request.password()));
