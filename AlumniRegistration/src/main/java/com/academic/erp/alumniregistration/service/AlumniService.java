@@ -6,6 +6,7 @@ import com.academic.erp.alumniregistration.dto.SearchRequest;
 import com.academic.erp.alumniregistration.entity.Alumni;
 import com.academic.erp.alumniregistration.entity.AlumniEducation;
 import com.academic.erp.alumniregistration.entity.AlumniOrganization;
+import com.academic.erp.alumniregistration.helper.JwtUtil;
 import com.academic.erp.alumniregistration.repo.AlumniEducationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniOrganizationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniRepository;
@@ -28,6 +29,9 @@ public class AlumniService {
 
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+
+    @Autowired
+    private JwtUtil jwtUtil;
 
     public ResponseEntity<String> registerAlumni(RegistrationRequest registrationRequest) {
         Alumni alumni = new Alumni();
@@ -68,15 +72,15 @@ public class AlumniService {
         return ResponseEntity.ok(null);
     }
 
-    public Boolean loginAlumni(LoginRequest loginRequest) {
+    public String loginAlumni(LoginRequest loginRequest) {
         Alumni alumni = alumniRepository.findByEmail(loginRequest.email());
 
         if(alumni == null)
-            return false;
+            return null;
         else if(!passwordEncoder.matches(loginRequest.password(), alumni.getPassword()))
         {
-            return false;
+            return null;
         }
-        return true;
+        return jwtUtil.generateToken(loginRequest.email());
     }
 }

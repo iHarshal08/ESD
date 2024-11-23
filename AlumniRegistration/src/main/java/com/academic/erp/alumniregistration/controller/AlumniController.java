@@ -20,9 +20,10 @@ public class AlumniController {
 
     @PostMapping("/login")
     public ResponseEntity<String> loginAlumni(@RequestBody LoginRequest loginRequest) {
-        if(alumniService.loginAlumni(loginRequest))
+        String token = alumniService.loginAlumni(loginRequest);
+        if(token != null)
         {
-            return ResponseEntity.ok("Login Successfully");
+            return ResponseEntity.ok(token);
         }
         return ResponseEntity.ok("Invalid Credential");
     }
