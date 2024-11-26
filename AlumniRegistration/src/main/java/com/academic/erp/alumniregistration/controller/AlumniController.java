@@ -16,7 +16,7 @@ public class AlumniController {
     @Autowired
     private AlumniService alumniService;
 
-    @PostMapping("/login")
+    @PostMapping("login")
     public ResponseEntity<String> loginAlumni(@RequestBody LoginRequest loginRequest) {
         String token = alumniService.loginAlumni(loginRequest);
         if(token != null)
