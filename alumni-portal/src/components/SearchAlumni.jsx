@@ -20,7 +20,8 @@ function SearchAlumni() {
     e.preventDefault();
     try {
       const response = await searchAlumni(searchData);
-      if (response.data) {
+      console.log(response);
+      if (response) {
         navigate("/login", { state: { email: searchData.email } });
       } else {
         navigate("/register");
