@@ -1,6 +1,5 @@
 package com.academic.erp.alumniregistration.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.*;
 
 public record RegistrationRequest (
@@ -51,10 +50,10 @@ public record RegistrationRequest (
         String address,
 
         @NotBlank(message = "Joining date is mandatory")
-        @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}", message = "Joining date must be in the format DD-MM-YYYY")
+        @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Joining date must be in the format YYYY-MM-DD")
         String joiningDate,
 
         @NotBlank(message = "Leaving date is mandatory")
-        @Pattern(regexp = "\\d{2}-\\d{2}-\\d{4}", message = "Leaving date must be in the format DD-MM-YYYY")
+        @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Leaving date must be in the format YYYY-MM-DD")
         String leavingDate
 ) {}

@@ -12,7 +12,6 @@ import com.academic.erp.alumniregistration.repo.AlumniEducationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniOrganizationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
