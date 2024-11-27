@@ -49,11 +49,7 @@ public record RegistrationRequest (
         @Size(max = 500, message = "Address must not exceed 500 characters")
         String address,
 
-        @NotBlank(message = "Joining date is mandatory")
-        @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Joining date must be in the format YYYY-MM-DD")
         String joiningDate,
 
-        @NotBlank(message = "Leaving date is mandatory")
-        @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Leaving date must be in the format YYYY-MM-DD")
         String leavingDate
 ) {}
