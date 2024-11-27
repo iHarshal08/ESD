@@ -1,4 +1,4 @@
-function LoginUI({ email, setEmail, password, setPassword, handleLogin, message }) {
+function LoginUI({ email, setEmail,password, setPassword, handleLogin, message }) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-blue-200 px-4">
         <div className="bg-blue-50 p-8 rounded-lg shadow-md w-full max-w-md">
@@ -17,7 +17,7 @@ function LoginUI({ email, setEmail, password, setPassword, handleLogin, message 
               <input
                 type="email"
                 id="email"
-                placeholder="Enter your email"
+                placeholder={email}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-600"

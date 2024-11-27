@@ -6,34 +6,27 @@ import com.academic.erp.alumniregistration.dto.SearchRequest;
 import com.academic.erp.alumniregistration.entity.Alumni;
 import com.academic.erp.alumniregistration.entity.AlumniEducation;
 import com.academic.erp.alumniregistration.entity.AlumniOrganization;
+import com.academic.erp.alumniregistration.exception.ResourceNotFoundException;
 import com.academic.erp.alumniregistration.helper.JwtUtil;
 import com.academic.erp.alumniregistration.repo.AlumniEducationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniOrganizationRepository;
 import com.academic.erp.alumniregistration.repo.AlumniRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AlumniService {
 
-    @Autowired
-    private AlumniRepository alumniRepository;
+    private final AlumniRepository alumniRepository;
+    private final AlumniEducationRepository alumniEducationRepository;
+    private final AlumniOrganizationRepository alumniOrganizationRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
 
-    @Autowired
-    private AlumniEducationRepository alumniEducationRepository;
-
-    @Autowired
-    private AlumniOrganizationRepository alumniOrganizationRepository;
-
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    public ResponseEntity<String> registerAlumni(RegistrationRequest registrationRequest) {
+    public String registerAlumni(RegistrationRequest registrationRequest) {
         Alumni alumni = new Alumni();
         AlumniEducation ae = new AlumniEducation();
         AlumniOrganization ao = new AlumniOrganization();
@@ -59,17 +52,17 @@ public class AlumniService {
         ao.setLeavingDate(registrationRequest.leavingDate());
         alumniOrganizationRepository.save(ao);
 
-        return ResponseEntity.ok("Registration Successful");
+        return "Registration Successful";
     }
 
-    public ResponseEntity<Alumni> searchAlumni(SearchRequest searchRequest) {
+    public Alumni searchAlumni(SearchRequest searchRequest) {
         if(alumniRepository.findByFirstNameAndLastNameAndEmail(searchRequest.firstName(), searchRequest.lastName(), searchRequest.email()).isPresent())
         {
-            Alumni a = alumniRepository.findByFirstNameAndLastNameAndEmail(searchRequest.firstName(), searchRequest.lastName(), searchRequest.email()).orElse(null);
-            if(alumniEducationRepository.findByAlumniIdAndPassingYear(a.getId(), searchRequest.passingYear()).isPresent())
-                return ResponseEntity.ok(a);
+            Alumni alumni = alumniRepository.findByFirstNameAndLastNameAndEmail(searchRequest.firstName(), searchRequest.lastName(), searchRequest.email()).orElse(null);
+            if(alumniEducationRepository.findByAlumniIdAndPassingYear(alumni.getId(), searchRequest.passingYear()).isPresent())
+                return alumni;
         }
-        return ResponseEntity.ok(null);
+        throw new ResourceNotFoundException("Alumni not found with the provided details.");
     }
 
     public String loginAlumni(LoginRequest loginRequest) {

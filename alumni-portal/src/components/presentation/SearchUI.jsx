@@ -1,6 +1,6 @@
 import React from "react";
 
-function SearchUI({ searchData, handleChange, handleSubmit }) {
+function SearchUI({ searchData, handleChange, handleSubmit,message }) {
   return (
     <div className="flex justify-center items-center min-h-screen bg-blue-200 px-4">
       <div className="bg-blue-50 p-6 sm:p-8 rounded-lg shadow-md w-full max-w-sm md:max-w-md lg:max-w-lg">
@@ -71,7 +71,12 @@ function SearchUI({ searchData, handleChange, handleSubmit }) {
               className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-
+          {message && (
+          <p className={`mt-4 text-center ${message.includes("Successful") ? "text-green-500" : "text-red-500"} text-sm sm:text-base`}>
+            {message}
+          </p>
+        )}
+        
           {/* Submit Button */}
           <div>
             <button
@@ -81,7 +86,17 @@ function SearchUI({ searchData, handleChange, handleSubmit }) {
               Search
             </button>
           </div>
+          <p className="mt-4 text-center text-sm text-gray-600">
+          Don't have an account?{" "}
+          <button
+            onClick={() => window.location.href = "/register"} // Navigate to register
+            className="text-indigo-600 hover:text-indigo-800 font-semibold transition duration-200"
+          >
+            Register here.
+          </button>
+        </p>
         </form>
+        
       </div>
     </div>
 
