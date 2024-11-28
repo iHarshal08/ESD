@@ -16,7 +16,7 @@ function Registration() {
     passingYear: "",
     joiningYear: "",
     collegeName: "",
-    organization: "",
+    organizationName: "",
     position: "",
     address: "",
     joiningDate: "",

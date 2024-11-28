@@ -46,6 +46,7 @@ public class AlumniService {
         alumniEducationRepository.save(ae);
 
         ao.setAlumni(alumni);
+        ao.setOrganizationName(registrationRequest.organizationName());
         ao.setPosition(registrationRequest.position());
         ao.setJoiningDate(registrationRequest.joiningDate());
         ao.setLeavingDate(registrationRequest.leavingDate());

@@ -19,7 +19,7 @@ public class AlumniOrganization {
     @ManyToOne
     @JoinColumn(name = "alumni_id")
     private Alumni alumni;
-
+    private String organizationName;
     private String position;
     private String joiningDate;
     private String leavingDate;

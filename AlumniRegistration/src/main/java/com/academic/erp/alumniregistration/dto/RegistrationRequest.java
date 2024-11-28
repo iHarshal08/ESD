@@ -39,7 +39,7 @@ public record RegistrationRequest (
 
         @NotBlank(message = "Organization is mandatory")
         @Size(max = 200, message = "Organization must not exceed 200 characters")
-        String organization,
+        String organizationName,
 
         @NotBlank(message = "Position is mandatory")
         @Size(max = 100, message = "Position must not exceed 100 characters")

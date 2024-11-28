@@ -165,13 +165,13 @@ function RegistrationUI({ formData, handleChange, handleSubmit }) {
 
           {/* Organization */}
           <div>
-            <label htmlFor="organization" className="block text-sm font-medium text-gray-600">
+            <label htmlFor="organizationName" className="block text-sm font-medium text-gray-600">
               Organization
             </label>
             <select
-              name="organization"
-              id="organization"
-              value={formData.organization}
+              name="organizationName"
+              id="organizationName"
+              value={formData.organizationName}
               onChange={handleChange}
               className="mt-1 w-full px-4 py-2 border rounded-md focus:ring-blue-500 focus:border-blue-500"
             >
@@ -180,6 +180,10 @@ function RegistrationUI({ formData, handleChange, handleSubmit }) {
               <option value="Microsoft">Microsoft</option>
               <option value="Amazon">Amazon</option>
               <option value="Apple">Apple</option>
+              <option value="Qualcomm">Qualcomm</option>
+              <option value="Morgan Stanlay">Morgan Stanlay</option>
+              <option value="Axtria">Axtria</option>
+              <option value="other">Other</option>
             </select>
           </div>
 
